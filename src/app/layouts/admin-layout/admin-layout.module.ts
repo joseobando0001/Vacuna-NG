@@ -33,11 +33,8 @@ import { BlockUIModule } from 'primeng/blockui';
 import { MatRadioModule } from '@angular/material/radio';
 import { MatMenuModule } from '@angular/material/menu';
 import { ErrorComponent } from 'app/error/error.component';
-import { NgSelectModule } from '@ng-select/ng-select';
-import { ChartistModule } from 'ng-chartist';
 import { MatCardModule } from '@angular/material/card'
 import { MatDividerModule } from '@angular/material/divider';
-import { PdfViewerModule } from 'ng2-pdf-viewer';
 import { InputTextModule } from 'primeng/inputtext';
 import { TooltipModule } from 'primeng/tooltip';
 import { MessagesModule } from 'primeng/messages';
@@ -53,8 +50,6 @@ import { LoginComponent } from 'app/login/login.component';
   imports: [
     CommonModule,
     RouterModule.forChild(AdminLayoutRoutes),
-    NgSelectModule,
-    ChartistModule,
     FormsModule,
     ReactiveFormsModule,
     NgxSpinnerModule,
@@ -77,7 +72,6 @@ import { LoginComponent } from 'app/login/login.component';
     InputTextModule,
     ToastModule,
     DynamicDialogModule,
-    PdfViewerModule,
     TableModule,
     DialogModule,
     MessageModule,

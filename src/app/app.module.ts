@@ -16,12 +16,9 @@ import { ToastModule } from 'primeng/toast';
 import { DynamicDialogModule } from 'primeng/dynamicdialog';
 import { TableModule } from 'primeng/table';
 import { NgxSpinnerModule } from 'ngx-spinner';
-//import { OAuthModule } from 'angular-oauth2-oidc';
-import { ChartistModule } from 'ng-chartist';
 import { ToastrModule } from 'ngx-toastr';
 import { DatePipe } from '@angular/common';
-import { EditarVacunadosComponent } from './vacunado/editar-vacunados/editar-vacunados.component';
-import { LoginComponent } from './login/login.component';
+
 
 
 @NgModule({
@@ -34,7 +31,6 @@ import { LoginComponent } from './login/login.component';
     RouterModule,
     AppRoutingModule,
     NgxSpinnerModule,
-    ChartistModule,
     ButtonModule,
     ToastrModule.forRoot(),
     ToastModule,
