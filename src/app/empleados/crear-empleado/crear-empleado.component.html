@@ -1,0 +1,161 @@
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-md-12">
+            <div class="card">
+                <div class="card-header card-header-success">
+                    <h4 class="card-title">Nuevo Empleado</h4>
+                    <p class="card-category"> </p>
+                </div>
+                <div class="card-body">
+                    <form #crear="ngForm" [formGroup]="registerForm">
+                        <div class="row">
+                            <div class="form-group col-md-12">
+                                <span style="font-weight:bold">Cedula</span>
+                                <input formControlName="cedula" class="form-control" [(ngModel)]="empleado.cedula"
+                                    name="cedula" maxlength="10" minlength="10"
+                                    onkeypress="if ( isNaN( String.fromCharCode(event.keyCode) )) return false;"
+                                    placeholder="Ingrese cedula" type="text"
+                                    [ngClass]="{ 'is-invalid': submitted && f.cedula.errors }" required>
+                                <div *ngIf="submitted && f.cedula.errors" class="invalid-feedback">
+                                    <div *ngIf="f.cedula.errors.required">Cedula es requerida</div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="form-group col-md-12">
+                                <span style="font-weight:bold">Nombres</span>
+                                <input formControlName="nombres" class="form-control" [(ngModel)]="empleado.nombres"
+                                    name="nombres" pattern="[A-Za-z ]+" placeholder="Ingrese nombres" type="text"
+                                    [ngClass]="{ 'is-invalid': submitted && f.nombres.errors }" required>
+                                <div *ngIf="submitted && f.nombres.errors" class="invalid-feedback">
+                                    <div *ngIf="f.nombres.errors.required">Nombres son requeridos</div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="form-group col-md-12">
+                                <span style="font-weight:bold">Apellidos</span>
+                                <input formControlName="apellidos" class="form-control"
+                                    [(ngModel)]="empleado.apellidos" name="apellidos" pattern="[A-Za-z ]+"
+                                    placeholder="Ingresar apellidos" type="text"
+                                    [ngClass]="{ 'is-invalid': submitted && f.apellidos.errors }" required>
+                                <div *ngIf="submitted && f.apellidos.errors" class="invalid-feedback">
+                                    <div *ngIf="f.apellidos.errors.required">Apellidos son requeridos</div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="form-group col-md-12">
+                                <span style="font-weight:bold">Correo electrónico</span>
+                                <input formControlName="correo" class="form-control" [(ngModel)]="empleado.correo"
+                                    name="correo" pattern="^[^\s@]+@[^\s@]+\.[^\s@]{2,}$" placeholder="Ingrese correo"
+                                    type="text" [ngClass]="{ 'is-invalid': submitted && f.correo.errors }" required>
+                                <div *ngIf="submitted && f.correo.errors" class="invalid-feedback">
+                                    <div *ngIf="f.correo.errors.required">Correo electrónico es requerido
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="form-group col-md-12">
+                                <span style="font-weight:bold">Fecha de nacimiento</span>
+                                <input formControlName="nacimiento" class="form-control"
+                                    [(ngModel)]="empleado.nacimiento" name="nacimiento"
+                                    placeholder="Ingrese fecha de nacimiento" type="date"
+                                    [ngClass]="{ 'is-invalid': submitted && f.nacimiento.errors }" required>
+                                <div *ngIf="submitted && f.nacimiento.errors" class="invalid-feedback">
+                                    <div *ngIf="f.nacimiento.errors.required">Fecha de nacimiento es requerido
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="form-group col-md-12">
+                                <span style="font-weight:bold">Direccion</span>
+                                <input formControlName="direccion" class="form-control"
+                                    [(ngModel)]="empleado.direccion" name="direccion" placeholder="Ingrese direccion"
+                                    type="text" [ngClass]="{ 'is-invalid': submitted && f.direccion.errors }" required>
+                                <div *ngIf="submitted && f.direccion.errors" class="invalid-feedback">
+                                    <div *ngIf="f.direccion.errors.required">Direccion es requerido
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="form-group col-md-12">
+                                <span style="font-weight:bold">Telefono</span>
+                                <input formControlName="telefono" class="form-control" [(ngModel)]="empleado.telefono"
+                                    name="nombres" maxlength="10" minlength="10"
+                                    pattern="^((\\+91-?)|0)?[0-9]{10}$" placeholder="Ingrese telefono" type="text"
+                                    [ngClass]="{ 'is-invalid': submitted && f.telefono.errors }" required>
+                                <div *ngIf="submitted && f.telefono.errors" class="invalid-feedback">
+                                    <div *ngIf="f.telefono.errors.required">Telefono es requerido</div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="form-group col">
+                                <span style="font-weight:bold">Estado de Vacunacion</span>
+                                <select formControlName="estado_vacunacion" class="form-control"
+                                    [(ngModel)]="empleado.estado_vacunacion" name="estado_vacunacion"
+                                    [ngClass]="{ 'is-invalid': submitted && f.estado_vacunacion.errors }">
+
+                                    <option value="VACUNADO">VACUNADO</option>
+                                    <option value="NO VACUNADO">NO VACUNADO</option>
+                                </select>
+                                <div *ngIf="submitted && f.estado_vacunacion.errors" class="invalid-feedback">
+                                    <div *ngIf="f.estado_vacunacion.errors.required">Tipo de vacunacion es requerida</div>
+                                </div>
+                            </div>
+                        </div>
+                        <div *ngIf="empleado.estado_vacunacion == 'VACUNADO'">
+                            <div [formGroup]="registerVacunado">
+                                <div class="row">
+                                    <div class="form-group col">
+                                        <span style="font-weight:bold">Tipo de Vacuna</span>
+                                        <select formControlName="vacuna" class="form-control"
+                                            [(ngModel)]="empleado.id_carrera" name="vacuna"
+                                            [ngClass]="{ 'is-invalid': submitted && c.vacuna.errors }">
+                                            <option *ngFor="let v of vacunas; let i = index" [value]="v.id_vacuna">
+                                                {{v.descripcion}}
+                                            </option>
+                                        </select>
+                                        <div *ngIf="submitted && c.vacuna.errors" class="invalid-feedback">
+                                            <div *ngIf="c.vacuna.errors.required">Vacuna es requerida</div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="form-group col">
+                                <span style="font-weight:bold">Estado</span>
+                                <select formControlName="estado" class="form-control" [(ngModel)]="empleado.estado"
+                                    name="estado" [ngClass]="{ 'is-invalid': submitted && f.estado.errors }">
+
+                                    <option value="true">ACTIVO</option>
+                                    <option value="false">INACTIVO</option>
+                                </select>
+                                <div *ngIf="submitted && f.estado.errors" class="invalid-feedback">
+                                    <div *ngIf="f.estado.errors.required">Estado es requerido</div>
+                                </div>
+                            </div>
+                        </div>
+                        <button mat-raised-button (click)="cancelModal()"
+                            class="btn btn-danger btn-round btn-sm pull-left"> <i _ngcontent-c2=""
+                                class="material-icons">cancel_presentation</i> Cancelar</button>
+                        <button class="btn btn-success btn-round btn-sm pull-right" (click)="onSubmit()"
+                            mat-raised-button=""> <i _ngcontent-c2="" class="material-icons">note_add</i>
+                            Guardar</button>
+
+                        <div class="clearfix"></div>
+                    </form>
+                </div>
+            </div>
+        </div>
+
+    </div>
+</div>
+<ngx-spinner bdColor="rgba(180,180,180,0.5)" size="large" color="#ff4242" type="ball-clip-rotate-multiple"
+    [fullScreen]="true">
+</ngx-spinner>

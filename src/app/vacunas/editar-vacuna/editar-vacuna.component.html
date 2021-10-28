@@ -1,0 +1,38 @@
+<div class="main-content">
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-md-12">
+                <div class="card">
+                    <div class="card-header card-header-primary">
+                        <h4 class="card-title">Información para Editar del Empleado</h4>
+                        <p class="card-category"> </p>
+                    </div>
+                    <div class="card-body">
+                        <form #crear="ngForm" [formGroup]="registerForm">
+                            <div class="row">
+                                <div class="form-group col-md-12">
+                                    <span style="font-weight:bold">Descripcion</span>
+                                    <input formControlName="descripcion" class="form-control"
+                                        [(ngModel)]="vacuna.descripcion" name="descripcion"
+                                        placeholder="Ingrese nombre de vacuna" type="text"
+                                        [ngClass]="{ 'is-invalid': submitted && f.descripcion.errors }" required>
+                                    <div *ngIf="submitted && f.descripcion.errors" class="invalid-feedback">
+                                        <div *ngIf="f.descripcion.errors.required">Nombre de vacuna es requerido</div>
+                                    </div>
+                                </div>
+                            </div>
+                            <button mat-raised-button (click)="cancelModal()"
+                                class="btn btn-danger btn-round btn-sm pull-left"> <i _ngcontent-c2=""
+                                    class="material-icons">cancel_presentation</i> Cancelar</button>
+                            <button class="btn btn-success btn-round btn-sm pull-right" (click)="onSubmit()"
+                                mat-raised-button=""> <i _ngcontent-c2="" class="material-icons">note_add</i>
+                                Guardar</button>
+                            <div class="clearfix"></div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</div>

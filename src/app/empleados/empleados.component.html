@@ -1,0 +1,162 @@
+<div class="main-content">
+  <div class="container-fluid">
+    <div class="row">
+      <div class="col-md-12">
+        <div class="card">
+          <div class="card-header card-header-info">
+            <div class="nav-tabs-navigation">
+              <div class="nav-tabs-wrapper">
+                <ul class="nav nav-tabs" data-tabs="tabs">
+                  <li class="nav-item">
+                    <a class="nav-link active" href="#preg" data-toggle="tab">
+                      <i class="material-icons">badge</i> EMPLEADOS <span class="cdk-visually-hidden">
+                      </span>
+                    </a>
+                  </li>
+                  <li class="nav-item ">
+                    <a class="nav-link" href="#vacunas" data-toggle="tab">
+                      <i class="material-icons">vaccines</i> Vacunas
+                      <span class="cdk-visually-hidden">
+                      </span>
+                    </a>
+                  </li>
+                </ul>
+              </div>
+            </div>
+          </div>
+          <div class="card-body">
+            <div *ngIf="add">
+              <app-crear-empleado></app-crear-empleado>
+            </div>
+            <div class="tab-content">
+              <div class="tab-pane active show" id="preg">
+                <ng-container *ngIf="ocultar">
+                <div class="row p-grid p-fluid">
+                  <div class="col-1" *ngIf="ocultarboton">
+                    <button mat-raised-button type="submit" (click)="addEmpleado()" pTooltip="Nuevo Empleado"
+                      tooltipPosition="top" class="btn btn-sm btn-outline-success btn-just-icon btn-round">
+                      <i class="material-icons">add</i>
+                    </button>
+                  </div>
+
+                    <div class="col-10 p-ml-auto">
+                      <span class="p-input-icon-left ">
+                        <i class="pi pi-search"></i>
+                        <input type="text " pInputText class="p-inputtext-sm"
+                          (input)="dt.filterGlobal($event.target.value, 'contains')" placeholder="Buscar...">
+                      </span>
+                    </div>
+                </div>
+                  <p-table #dt styleClass="p-datatable-sm" [columns]="cols" [value]="formData" [paginator]="true"
+                    [rows]="5" [rowsPerPageOptions]="[5,10,20]" [responsive]="true"
+                    [globalFilterFields]="['cedula','nombres','apellidos','correo','nacimiento','direccion','telefono','estado','estado_vacunacion']">
+                    <ng-template pTemplate="header" let-columns>
+                      <tr>
+                        <th style="width: 35%; text-align: center;" pSortableColumn="cedula">
+                          CEDULA
+                          <p-sortIcon field="cedula"></p-sortIcon>
+                        </th>
+                        <th style="width: 35%; text-align: center;" pSortableColumn="nombres">
+                          NOMBRES
+                          <p-sortIcon field="nombres"></p-sortIcon>
+                        </th>
+                        <th style="width: 35%; text-align: center;" pSortableColumn="apellidos">
+                          APELLIDOS
+                          <p-sortIcon field="apellidos"></p-sortIcon>
+                        </th>
+                        <th style="width: 35%; text-align: center;" pSortableColumn="correo">
+                          CORREO
+                          <p-sortIcon field="correo"></p-sortIcon>
+                        </th>
+                        <th style="width: 35%; text-align: center;" pSortableColumn="nacimiento">
+                          FECHA DE NACIMIENTO
+                          <p-sortIcon field="nacimiento"></p-sortIcon>
+                        </th>
+                        <th style="width: 35%; text-align: center;" pSortableColumn="direccion">
+                          DIRECCION
+                          <p-sortIcon field="direccion"></p-sortIcon>
+                        </th>
+                        <th style="width: 35%; text-align: center;" pSortableColumn="telefono">
+                          TELEFONO
+                          <p-sortIcon field="telefono"></p-sortIcon>
+                        </th>
+                        <th style="width: 20%; text-align: center;" pSortableColumn="estado">
+                          ESTADO
+                          <p-sortIcon field="estado"></p-sortIcon>
+                        </th>
+                        <th style="width: 35%; text-align: center;" pSortableColumn="estado_vacunacion">
+                          ESTADO DE VACUNACION
+                          <p-sortIcon field="estado_vacunacion"></p-sortIcon>
+                        </th>
+                        <th style="width: 20%;text-align: center;"> <i class="material-icons" pTooltip="Opciones"
+                            tooltipPosition="top">
+                            settings
+                          </i></th>
+
+                      </tr>
+                    </ng-template>
+                    <ng-template pTemplate="body" let-rowData let-columns="columns">
+                      <tr [pSelectableRow]="rowData" [pEditableRow]="rowData">
+                        <td style="text-align: center;">{{rowData.cedula}}</td>
+                        <td style="text-align: center;">
+                          <strong>{{rowData.nombres}}</strong>
+                        </td>
+                        <td style="text-align: center;">
+                          <strong>{{rowData.apellidos}}</strong>
+                        </td>
+                        <td style="text-align: center;">{{rowData.correo}}</td>
+                        <td style="text-align: center;">{{rowData.nacimiento}}</td>
+                        <td style="text-align: center;">{{rowData.direccion}}</td>
+                        <td style="text-align: center;">{{rowData.telefono}}</td>
+                        <td style="text-align: center;">
+                          <ng-container *ngIf="rowData.estado == '0'">
+                            <div class="card-icon" pTooltip="Inactivo" tooltipPosition="top">
+                              <i class="material-icons">visibility_off</i>
+                            </div>
+                          </ng-container>
+                          <ng-container *ngIf="rowData.estado == '1'">
+                            <div class="card-icon" pTooltip="Activo" tooltipPosition="top">
+                              <i class="material-icons">check_circle</i>
+                            </div>
+                          </ng-container>
+                        </td>
+                        <td style="text-align: center;">
+                          <ng-container *ngIf="rowData.estado_vacunacion == 'NO VACUNADO'">
+                            <div class="card-icon" pTooltip="No vacunado" tooltipPosition="top">
+                              <i class="material-icons">sentiment_very_dissatisfied</i>
+                            </div>
+                          </ng-container>
+                          <ng-container *ngIf="rowData.estado_vacunacion == 'VACUNADO'">
+                            <div class="card-icon" pTooltip="Vacunado" tooltipPosition="top">
+                              <i class="material-icons">health_and_safety</i>
+                            </div>
+                          </ng-container>
+                        </td>
+                        <td style="text-align: center;">
+                          <button class="btn btn-outline-info btn-just-icon btn-round btn-sm" pTooltip="Editar"
+                            tooltipPosition="top" (click)="edit(rowData.id_empleado)">
+                            <i class="material-icons">edit</i>
+                          </button>
+                          <button class="btn btn-outline-danger btn-just-icon btn-round btn-sm" pTooltip="Eliminar"
+                            tooltipPosition="top" (click)="modalBorrar(rowData.id_empleado)">
+                            <i class="material-icons">delete</i>
+                          </button>
+                        </td>
+                      </tr>
+                    </ng-template>
+                  </p-table>
+                </ng-container>
+
+              </div>
+              <div class="tab-pane" id="vacunas">
+                <app-vacunas></app-vacunas>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<ngx-spinner bdColor="rgba(180,180,180,0.5)" size="large" color="#ff4242" type="ball-atom" [fullScreen]="true">
+</ngx-spinner>
