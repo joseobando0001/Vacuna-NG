@@ -9,7 +9,6 @@ export const ROUTES = [
   { path: '/person', title: 'Perfil', icon: 'person', class: '' },
   { path: '/empleados', title: 'Empleados', icon: 'badge', class: '' },
   { path: '/register', title: 'Registrarse', icon: 'app_registration', class: '' },
-  { path: '/login', title: 'Iniciar Sesion', icon: 'login', class: '' },
 
 ];
 
@@ -21,7 +20,7 @@ export const ROUTES = [
 export class SidebarComponent implements OnInit {
   menuItems2: any[];
 
-  constructor(private adminService: AdminService, private spinner: NgxSpinnerService, private router: Router,) { }
+  constructor(private spinner: NgxSpinnerService, private router: Router,) { }
 
   ngOnInit() {
     this.menuItems2 = ROUTES.filter(menuItem => menuItem);

@@ -17,7 +17,6 @@ import { DynamicDialogModule } from 'primeng/dynamicdialog';
 import { TableModule } from 'primeng/table';
 import { NgxSpinnerModule } from 'ngx-spinner';
 //import { OAuthModule } from 'angular-oauth2-oidc';
-import { AuthService } from './services/auth.service';
 import { ChartistModule } from 'ng-chartist';
 import { ToastrModule } from 'ngx-toastr';
 import { DatePipe } from '@angular/common';
@@ -48,7 +47,7 @@ import { LoginComponent } from './login/login.component';
     AdminLayoutComponent,
 
   ],
-  providers: [AdminService, AuthService, DatePipe],
+  providers: [AdminService, DatePipe],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

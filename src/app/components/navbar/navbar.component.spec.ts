@@ -1,5 +1,7 @@
 import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
-
+import { AdminService } from 'app/services/admin.service';
+import { HttpClientTestingModule} from '@angular/common/http/testing';
+import { RouterTestingModule} from '@angular/router/testing';
 import { NavbarComponent } from './navbar.component';
 
 describe('NavbarComponent', () => {
@@ -8,6 +10,8 @@ describe('NavbarComponent', () => {
 
   beforeEach(waitForAsync(() => {
     TestBed.configureTestingModule({
+      imports: [HttpClientTestingModule,RouterTestingModule],
+      providers: [AdminService],
       declarations: [ NavbarComponent ]
     })
     .compileComponents();

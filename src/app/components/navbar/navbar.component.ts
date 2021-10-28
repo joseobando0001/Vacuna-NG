@@ -3,7 +3,6 @@ import { ROUTES } from '../sidebar/sidebar.component';
 import { Location, LocationStrategy, PathLocationStrategy } from '@angular/common';
 import { Router } from '@angular/router';
 import { AdminService } from 'app/services/admin.service';
-import { AuthService } from 'app/services/auth.service';
 import { NgxSpinnerService } from 'ngx-spinner';
 import Swal from 'sweetalert2';
 
@@ -24,7 +23,7 @@ export class NavbarComponent implements OnInit {
     idpidm;
 
     constructor(location: Location, private element: ElementRef, private router: Router,
-        private adminService: AdminService, private authService: AuthService, private spinner: NgxSpinnerService) {
+        private adminService: AdminService, private spinner: NgxSpinnerService) {
         this.location = location;
         this.sidebarVisible = false;
     }

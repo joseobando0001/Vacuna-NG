@@ -1,4 +1,3 @@
-import { AuthService } from 'app/services/auth.service';
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
@@ -19,7 +18,7 @@ export class LoginComponent implements OnInit {
   cedula;
 
   constructor(private formBuilder: FormBuilder, private router: Router,
-    private spinner: NgxSpinnerService, private adminService: AdminService, private authService: AuthService) { }
+    private spinner: NgxSpinnerService, private adminService: AdminService) { }
 
   ngOnInit(): void {
     this.cedula = atob(localStorage.getItem('empleado'));
