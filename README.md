@@ -1,9 +1,9 @@
 # [Frontend Angular  - Inventario de Vacunación]
 
 **NOTA** : Se ocupo la plantilla de Creative Tim, la cual puede ser descargada y usada de forma gratuita.
-La pueden encontrar en el siguiente enlace:
-- [Download from Creative Tim](https://www.creative-tim.com/product/material-dashboard-angular2).
-**Inventario de Vacunación** es una aplicación solicitada para poder evaluar los conocimientos en programacioón y en logica, por medio de un problema común y cual seria su solución mas optima:
+La pueden encontrar en el siguiente enlace:  [Download from Creative Tim](https://www.creative-tim.com/product/material-dashboard-angular2).
+
+-**Inventario de Vacunación** es una aplicación solicitada para poder evaluar los conocimientos en programacioón y en logica, por medio de un problema común y cual seria su solución mas optima:
 Para ello, se ha encontrado que los principales involucrados para poder desarrollar el proyecto son:
 - Administrador
 - Vacunas.
