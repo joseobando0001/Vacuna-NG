@@ -15,7 +15,7 @@ export class EmpleadosComponent implements OnInit {
   formData: Empleados;
   ocultar: boolean;
   cols: any[];
-  pregunta: any;
+  user: any;
   ocultarboton: boolean;
   add: boolean;
   constructor(private adminService: AdminService, private spinner: NgxSpinnerService,
@@ -89,6 +89,43 @@ export class EmpleadosComponent implements OnInit {
 
   }
 
+  alta(id) {
+    console.log(id);
+    this.spinner.show();
+
+    setTimeout(() => {
+      this.adminService.get('userced/' + id).subscribe((data: {}) => {
+        this.user = data;
+        if (this.user.length === 0) {
+          console.log('NADA DE DATOS', this.user.user);
+          localStorage.setItem('empleado', btoa(id));
+          this.router.navigate(['/creacion']);
+        } else {
+          console.log('DATOS');
+          Swal.fire({
+            title: 'Se encontraron datos, deseas editarlos?',
+            icon: 'info',
+            showCancelButton: true,
+            confirmButtonColor: '#3085d6',
+            cancelButtonColor: '#d33',
+            confirmButtonText: 'Si, editar!'
+          }).then((result) => {
+            if (result.value) {
+              this.router.navigate(['/modificar-user', this.user[0].user]);
+            }
+          }
+          );
+        }
+      })
+
+      this.spinner.hide();
+    }, 3000);
+
+
+
+
+  }
+
   modalBorrar(id) {
     Swal.fire({
       title: 'Estas seguro de eliminar este empleado?',
@@ -112,6 +149,40 @@ export class EmpleadosComponent implements OnInit {
     }, error => {
       console.log(error);
     });
+  }
+
+  vacunado(id){
+    console.log(id);
+    this.spinner.show();
+    setTimeout(() => {
+      this.adminService.get('vacunced/' + id).subscribe((data: {}) => {
+        this.user = data;
+        if (this.user.length === 0) {
+          console.log('NADA DE DATOS', this.user.user);
+          localStorage.setItem('empleado', btoa(id));
+          this.router.navigate(['/vacunado']);
+        } else {
+          console.log('DATOS');
+          Swal.fire({
+            title: 'Deseas agregar mas vacunas?',
+            showDenyButton: true,
+            showCancelButton: true,
+            confirmButtonText: 'Agregar',
+            denyButtonText: `Mostrar`,
+            denyButtonColor: '#32ab38',
+          }).then((result) => {
+            /* Read more about isConfirmed, isDenied below */
+            if (result.isConfirmed) {
+              this.router.navigate(['/vacunado']);
+            } else if (result.isDenied) {
+             console.log('Mostrar ');
+            }
+          })
+        }
+      })
+
+      this.spinner.hide();
+    }, 3000);
   }
 
 }

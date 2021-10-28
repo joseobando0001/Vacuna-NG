@@ -1,0 +1,69 @@
+<div class="main-content">
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-md-12">
+                <div class="card">
+                    <div class="card-header card-header-success">
+                        <h4 class="card-title">Creación de Usuario</h4>
+                        <p class="card-category"> </p>
+                    </div>
+                    <div class="card-body">
+                        <form #crear="ngForm" [formGroup]="registerForm">
+                            <div class="row">
+                                <div class="form-group col">
+                                    <span style="font-weight:bold">Tipo de Vacuna</span>
+                                    <select formControlName="vacuna" class="form-control"
+                                        [(ngModel)]="vacunado.id_vacuna" name="vacuna"
+                                        [ngClass]="{ 'is-invalid': submitted && f.vacuna.errors }">
+                                        <option *ngFor="let v of vacunas; let i = index" [value]="v.id_vacuna">
+                                            {{v.descripcion}}
+                                        </option>
+                                    </select>
+                                    <div *ngIf="submitted && f.vacuna.errors" class="invalid-feedback">
+                                        <div *ngIf="f.vacuna.errors.required">Vacuna es requerida</div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="form-group col-md-12">
+                                    <span style="font-weight:bold">Fecha de vacunacion</span>
+                                    <input formControlName="fecha" class="form-control" [(ngModel)]="vacunado.fecha"
+                                        name="fecha" placeholder="Ingrese fecha" type="date"
+                                        [ngClass]="{ 'is-invalid': submitted && f.fecha.errors }" required>
+                                    <div *ngIf="submitted && f.fecha.errors" class="invalid-feedback">
+                                        <div *ngIf="f.fecha.errors.required">Fecha es requerida</div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="form-group col-md-12">
+                                    <span style="font-weight:bold">Numero de dosis</span>
+                                    <input formControlName="numero_dosis" class="form-control"
+                                        [(ngModel)]="vacunado.numero_dosis" name="numero_dosis"
+                                        placeholder="Ingrese numero de dosis" type="text"
+                                        [ngClass]="{ 'is-invalid': submitted && f.numero_dosis.errors }" required>
+                                    <div *ngIf="submitted && f.numero_dosis.errors" class="invalid-feedback">
+                                        <div *ngIf="f.numero_dosis.errors.required">Numero de dosis es requerida</div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <button mat-raised-button (click)="cancelModal()"
+                                class="btn btn-danger btn-round btn-sm pull-left"> <i _ngcontent-c2=""
+                                    class="material-icons">cancel_presentation</i> Cancelar</button>
+                            <button class="btn btn-success btn-round btn-sm pull-right" (click)="onSubmit()"
+                                mat-raised-button=""> <i _ngcontent-c2="" class="material-icons">note_add</i>
+                                Guardar</button>
+
+                            <div class="clearfix"></div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</div>
+<ngx-spinner bdColor="rgba(180,180,180,0.5)" size="large" color="#ff4242" type="ball-clip-rotate-multiple"
+    [fullScreen]="true">
+</ngx-spinner>

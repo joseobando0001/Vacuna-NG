@@ -1,27 +1,23 @@
-import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, NavigationEnd, Router } from '@angular/router';
-import { NgxSpinnerService } from 'ngx-spinner';
 import { AdminService } from 'app/services/admin.service';
+import { NgxSpinnerService } from 'ngx-spinner';
 import Swal from 'sweetalert2';
-import { Empleados } from 'app/models/empleados.model';
 
 @Component({
-  selector: 'app-editar-empleado',
-  templateUrl: './editar-empleado.component.html',
-  styleUrls: ['./editar-empleado.component.css']
+  selector: 'app-modificar-user',
+  templateUrl: './modificar-user.component.html',
+  styleUrls: ['./modificar-user.component.css']
 })
-export class EditarEmpleadoComponent implements OnInit {
+export class ModificarUserComponent implements OnInit {
 
   navigationSubscription;
   registerForm: FormGroup;
-  registerVacunado: FormGroup;
   submitted = false;
-  empleado: any;
+  user: any;
   idform;
-  formData: Empleados;
 
-  cols: any[];
   constructor(private formBuilder: FormBuilder, private route: ActivatedRoute,
     private router: Router, private adminService: AdminService, private spinner: NgxSpinnerService) {
     this.navigationSubscription = this.router.events.subscribe((e: any) => {
@@ -33,35 +29,22 @@ export class EditarEmpleadoComponent implements OnInit {
 
   ngOnInit(): void {
     this.initializar();
-    this.getEmpleadoId(this.idform);
+    this.getVacunaId(this.idform);
     this.registerForm = this.formBuilder.group({
-      cedula: ['', Validators.required],
-      nombres: ['', Validators.required],
-      apellidos: ['', Validators.required],
-      correo: ['', Validators.required],
-      nacimiento: ['', Validators.required],
-      direccion: ['', Validators.required],
-      telefono: ['', Validators.required],
-      estado_vacunacion: ['', Validators.required],
-      estado: ['', Validators.required]
-    });
-    this.empleado = {
-      cedula: '',
-      nombres: '',
-      apellidos: '',
-      correo: '',
-      nacimiento: '',
-      direccion: '',
-      telefono: '',
-      estado: '',
-      estado_vacunacion: '',
+      username: ['', Validators.required],
+      password: ['', Validators.required],
+      tipo: ['', Validators.required],
 
+    });
+    this.user = {
+      username: '',
+      password: '',
+      tipo: '',
     };
   }
 
   // convenience getter for easy access to form fields
   get f() { return this.registerForm.controls; }
-  get m() { return this.registerVacunado.controls; }
 
   onSubmit() {
     this.submitted = true;
@@ -70,7 +53,7 @@ export class EditarEmpleadoComponent implements OnInit {
     if (this.registerForm.invalid) {
       return;
     }
-    this.editarEmpleado();
+    this.editarVacuna();
     const Toast = Swal.mixin({
       toast: true,
       position: 'top-end',
@@ -96,8 +79,8 @@ export class EditarEmpleadoComponent implements OnInit {
     alert('SUCCESS!! :-)\n\n' + JSON.stringify(this.registerForm.value, null, 4));
   }
 
-  editarEmpleado() {
-    this.adminService.post('empleado', this.empleado);
+  editarVacuna() {
+    this.adminService.post('user', this.user);
     this.router.navigate(['/empleados']);
   }
 
@@ -126,10 +109,10 @@ export class EditarEmpleadoComponent implements OnInit {
     this.registerForm.reset();
   }
 
-  getEmpleadoId(id: number) {
-    this.empleado = [];
-    this.adminService.get('empleado/' + id).subscribe((data: {}) => {
-      this.empleado = data[0];
+  getVacunaId(id: number) {
+    this.user = [];
+    this.adminService.get('user/' + id).subscribe((data: {}) => {
+      this.user = data[0];
 
     });
   }
@@ -140,7 +123,5 @@ export class EditarEmpleadoComponent implements OnInit {
       this.idform = this.route.snapshot.params.id;
     }
   }
-
-
 
 }

@@ -109,25 +109,6 @@
                             </div>
                         </div>
                     </div>
-                    <div *ngIf="empleado.estado_vacunacion == 'VACUNADO'">
-                        <div [formGroup]="registerVacunado">
-                            <div class="row">
-                                <div class="form-group col">
-                                    <span style="font-weight:bold">Tipo de Vacuna</span>
-                                    <select formControlName="vacuna" class="form-control"
-                                        [(ngModel)]="empleado.id_carrera" name="vacuna"
-                                        [ngClass]="{ 'is-invalid': submitted && c.vacuna.errors }">
-                                        <option *ngFor="let v of vacunas; let i = index" [value]="v.id_vacuna">
-                                            {{v.descripcion}}
-                                        </option>
-                                    </select>
-                                    <div *ngIf="submitted && c.vacuna.errors" class="invalid-feedback">
-                                        <div *ngIf="c.vacuna.errors.required">Vacuna es requerida</div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
                     <div class="row">
                         <div class="form-group col">
                             <span style="font-weight:bold">Estado</span>

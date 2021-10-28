@@ -1,60 +1,46 @@
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
-import { Empleados } from 'app/models/empleados.model';
-import { Vacunas } from 'app/models/vacunas.model';
 import { AdminService } from 'app/services/admin.service';
 import { NgxSpinnerService } from 'ngx-spinner';
 import Swal from 'sweetalert2';
 
 @Component({
-  selector: 'app-crear-empleado',
-  templateUrl: './crear-empleado.component.html',
-  styleUrls: ['./crear-empleado.component.css']
+  selector: 'app-vacunado',
+  templateUrl: './vacunado.component.html',
+  styleUrls: ['./vacunado.component.css']
 })
-export class CrearEmpleadoComponent implements OnInit {
-
+export class VacunadoComponent implements OnInit {
   registerForm: FormGroup;
-  registerVacunado: FormGroup;
   submitted = false;
-  empleado: any;
+  vacunado: any;
   display: boolean;
-  selected1: any = [];
-  formData: Vacunas;
+  cedula;
+  vacunas;
 
   constructor(private formBuilder: FormBuilder, private router: Router,
     private spinner: NgxSpinnerService, private adminService: AdminService) { }
 
   ngOnInit(): void {
     this.getVacunas();
+    this.cedula = atob(localStorage.getItem('empleado'));
     this.registerForm = this.formBuilder.group({
-      cedula: ['', Validators.required],
-      nombres: ['', Validators.required],
-      apellidos: ['', Validators.required],
-      correo: ['', Validators.required],
-      nacimiento: ['', Validators.required],
-      direccion: ['', Validators.required],
-      telefono: ['', Validators.required],
-      estado_vacunacion: ['', Validators.required],
-      estado: ['', Validators.required]
+      vacuna: ['', Validators.required],
+      fecha: ['', Validators.required],
+      numero_dosis: ['', Validators.required],
+
     });
-    this.empleado = {
-      cedula: '',
-      nombres: '',
-      apellidos: '',
-      correo: '',
-      nacimiento: '',
-      direccion: '',
-      telefono: '',
-      estado: '',
-      estado_vacunacion: '',
+    this.display = false;
+    this.vacunado = {
+      cedula: this.cedula,
+      id_vacuna: '',
+      fecha: '',
+      numero_dosis: '',
 
     };
-    this.display = false;
   }
   // convenience getter for easy access to form fields
   get f() { return this.registerForm.controls; }
-  get c() { return this.registerVacunado.controls; }
 
 
   onSubmit() {
@@ -71,7 +57,7 @@ export class CrearEmpleadoComponent implements OnInit {
   }
 
   crearEmpleado() {
-    this.adminService.post('empleado', this.empleado);
+    this.adminService.post('vacunacion', this.vacunado);
     const Toast = Swal.mixin({
       toast: true,
       position: 'top-end',
@@ -114,7 +100,6 @@ export class CrearEmpleadoComponent implements OnInit {
 
   cancel() {
     this.router.navigate(['/empleados']);
-    window.location.reload();
   }
 
   onReset() {
@@ -122,14 +107,13 @@ export class CrearEmpleadoComponent implements OnInit {
     this.registerForm.reset();
   }
 
+
   getVacunas() {
     this.adminService.getdata('vacunas').subscribe((data) => {
-      this.formData = data;
       console.log(data);
+      this.vacunas = data;
     });
 
   }
-
-
 
 }

@@ -31,13 +31,13 @@
             <div class="tab-content">
               <div class="tab-pane active show" id="preg">
                 <ng-container *ngIf="ocultar">
-                <div class="row p-grid p-fluid">
-                  <div class="col-1" *ngIf="ocultarboton">
-                    <button mat-raised-button type="submit" (click)="addEmpleado()" pTooltip="Nuevo Empleado"
-                      tooltipPosition="top" class="btn btn-sm btn-outline-success btn-just-icon btn-round">
-                      <i class="material-icons">add</i>
-                    </button>
-                  </div>
+                  <div class="row p-grid p-fluid">
+                    <div class="col-1" *ngIf="ocultarboton">
+                      <button mat-raised-button type="submit" (click)="addEmpleado()" pTooltip="Nuevo Empleado"
+                        tooltipPosition="top" class="btn btn-sm btn-outline-success btn-just-icon btn-round">
+                        <i class="material-icons">add</i>
+                      </button>
+                    </div>
 
                     <div class="col-10 p-ml-auto">
                       <span class="p-input-icon-left ">
@@ -46,7 +46,7 @@
                           (input)="dt.filterGlobal($event.target.value, 'contains')" placeholder="Buscar...">
                       </span>
                     </div>
-                </div>
+                  </div>
                   <p-table #dt styleClass="p-datatable-sm" [columns]="cols" [value]="formData" [paginator]="true"
                     [rows]="5" [rowsPerPageOptions]="[5,10,20]" [responsive]="true"
                     [globalFilterFields]="['cedula','nombres','apellidos','correo','nacimiento','direccion','telefono','estado','estado_vacunacion']">
@@ -133,6 +133,16 @@
                           </ng-container>
                         </td>
                         <td style="text-align: center;">
+                          <button class="btn btn-outline-success btn-just-icon btn-round btn-sm" pTooltip="Dar de Alta"
+                            tooltipPosition="top" (click)="alta(rowData.cedula)">
+                            <i class="material-icons">thumb_up_off_alt</i>
+                          </button>
+                          <ng-container *ngIf="rowData.estado_vacunacion === 'VACUNADO'">
+                            <button class="btn btn-outline-warning btn-just-icon btn-round btn-sm"
+                              pTooltip="Registrar Vacuna" tooltipPosition="top" (click)="vacunado(rowData.cedula)">
+                              <i class="material-icons">vaccines</i>
+                            </button>
+                          </ng-container>
                           <button class="btn btn-outline-info btn-just-icon btn-round btn-sm" pTooltip="Editar"
                             tooltipPosition="top" (click)="edit(rowData.id_empleado)">
                             <i class="material-icons">edit</i>

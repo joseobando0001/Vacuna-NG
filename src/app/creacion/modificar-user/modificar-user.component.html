@@ -1,0 +1,64 @@
+<div class="main-content">
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-md-12">
+                <div class="card">
+                    <div class="card-header card-header-primary">
+                        <h4 class="card-title">Editar Usuario</h4>
+                        <p class="card-category"> </p>
+                    </div>
+                    <div class="card-body">
+                        <form #crear="ngForm" [formGroup]="registerForm">
+                            <div class="row">
+                                <div class="form-group col-md-12">
+                                    <span style="font-weight:bold">Descripcion</span>
+                                    <input formControlName="username" class="form-control" [(ngModel)]="user.username"
+                                        name="username" placeholder="Ingrese nombre de usuario" type="text"
+                                        [ngClass]="{ 'is-invalid': submitted && f.username.errors }" required>
+                                    <div *ngIf="submitted && f.username.errors" class="invalid-feedback">
+                                        <div *ngIf="f.username.errors.required">Nombre de usuario es requerido</div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="form-group col-md-12">
+                                    <span style="font-weight:bold">Contraseña</span>
+                                    <input formControlName="password" class="form-control" [(ngModel)]="user.password"
+                                        name="password" placeholder="Ingrese contraseña" type="password"
+                                        [ngClass]="{ 'is-invalid': submitted && f.password.errors }" required>
+                                    <div *ngIf="submitted && f.password.errors" class="invalid-feedback">
+                                        <div *ngIf="f.password.errors.required">Contraseña es requerida</div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="form-group col">
+                                    <span style="font-weight:bold">Estado de Vacunacion</span>
+                                    <select formControlName="tipo" class="form-control"
+                                        [(ngModel)]="user.tipo" name="tipo"
+                                        [ngClass]="{ 'is-invalid': submitted && f.tipo.errors }">
+                                        <option value="ADMIN">ADMIN</option>
+                                        <option value="EMPLEADO">EMPLEADO</option>
+                                    </select>
+                                    <div *ngIf="submitted && f.tipo_user.errors" class="invalid-feedback">
+                                        <div *ngIf="f.tipo.errors.required">Tipo de usuario es requerida
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <button mat-raised-button (click)="cancelModal()"
+                                class="btn btn-danger btn-round btn-sm pull-left"> <i _ngcontent-c2=""
+                                    class="material-icons">cancel_presentation</i> Cancelar</button>
+                            <button class="btn btn-success btn-round btn-sm pull-right" (click)="onSubmit()"
+                                mat-raised-button=""> <i _ngcontent-c2="" class="material-icons">note_add</i>
+                                Guardar</button>
+
+                            <div class="clearfix"></div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</div>

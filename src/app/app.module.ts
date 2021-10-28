@@ -23,6 +23,9 @@ import { ToastrModule } from 'ngx-toastr';
 import { DatePipe } from '@angular/common';
 import { RegisterComponent } from './register/register.component';
 import { PersonComponent } from './person/person.component';
+import { CreacionComponent } from './creacion/creacion.component';
+import { ModificarUserComponent } from './creacion/modificar-user/modificar-user.component';
+import { VacunadoComponent } from './vacunado/vacunado.component';
 
 @NgModule({
   imports: [

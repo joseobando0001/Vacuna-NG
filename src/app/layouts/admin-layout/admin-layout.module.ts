@@ -1,3 +1,5 @@
+import { VacunadoComponent } from './../../vacunado/vacunado.component';
+import { CreacionComponent } from './../../creacion/creacion.component';
 import { PersonComponent } from './../../person/person.component';
 import { CrearVacunaComponent } from './../../vacunas/crear-vacuna/crear-vacuna.component';
 import { EditarVacunaComponent } from './../../vacunas/editar-vacuna/editar-vacuna.component';
@@ -42,6 +44,7 @@ import { MessagesModule } from 'primeng/messages';
 import { MessageModule } from 'primeng/message';
 import {MatStepperModule} from '@angular/material/stepper'
 import { RegisterComponent } from 'app/register/register.component';
+import { ModificarUserComponent } from 'app/creacion/modificar-user/modificar-user.component';
 
 @NgModule({
   imports: [
@@ -91,7 +94,10 @@ import { RegisterComponent } from 'app/register/register.component';
     EditarVacunaComponent,
     CrearVacunaComponent,
     RegisterComponent,
-    PersonComponent
+    PersonComponent,
+    CreacionComponent,
+    ModificarUserComponent,
+    VacunadoComponent
   ]
 })
 
