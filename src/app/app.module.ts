@@ -22,6 +22,7 @@ import { ChartistModule } from 'ng-chartist';
 import { ToastrModule } from 'ngx-toastr';
 import { DatePipe } from '@angular/common';
 import { RegisterComponent } from './register/register.component';
+import { PersonComponent } from './person/person.component';
 
 @NgModule({
   imports: [

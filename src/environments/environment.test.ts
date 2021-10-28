@@ -5,10 +5,7 @@
 
 export const environment = {
   production: false,
-  API_URL: 'https://graduado-api-test.espe.edu.ec/AlumniQE/',
-  URL_SERVICE: 'https://espematico-api-test.espe.edu.ec/reporteWs/',
-  URL_UPDATA: 'https://updatedata-api-test.espe.edu.ec/UPBannerWS/',
-  URL_SEGADM: 'https://users-api.espe.edu.ec/',
+  API_URL: 'http://127.0.0.1:8080/VacunaWS/',
   sso: {
     serverUrl: 'https://srvcas.espe.edu.ec',
     clientId: 'uK1lnaxRbmauGv0OLjENQL_qAFIa',

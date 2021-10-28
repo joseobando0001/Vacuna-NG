@@ -1,3 +1,4 @@
+import { PersonComponent } from './../../person/person.component';
 import { CrearVacunaComponent } from './../../vacunas/crear-vacuna/crear-vacuna.component';
 import { EditarVacunaComponent } from './../../vacunas/editar-vacuna/editar-vacuna.component';
 import { VacunasComponent } from './../../vacunas/vacunas.component';
@@ -90,6 +91,7 @@ import { RegisterComponent } from 'app/register/register.component';
     EditarVacunaComponent,
     CrearVacunaComponent,
     RegisterComponent,
+    PersonComponent
   ]
 })
 

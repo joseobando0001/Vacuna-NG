@@ -1,0 +1,48 @@
+<div class="main-content">
+    <div class="container-fluid">
+        <div class="card">
+            <mat-card>
+                <div class="card-header card-header-primary">
+                    <h4 class="card-title text-center"> <i class="material-icons" style="float:right;">how_to_reg</i> MI
+                        PERFIL
+                    </h4>
+                </div>
+                <div class="col-md-12">
+                    <div class="card-body">
+
+                        <div class="card-title card text-white text-center bg-secondary"><strong>DATOS
+                                INFORMATIVOS</strong>
+                        </div>
+                        <h5 class="card-title text-left"><strong>Nombres:</strong>
+                        </h5>
+                        <h5 class="card-title text-left">
+                            <strong>Cedula:</strong>
+                        </h5>
+                        <h5 class="card-title text-left">
+                            <strong>Correo :</strong>
+                        </h5>
+
+                        <div>
+                            <div class="row">
+                                <span class="text-primary text-center">
+                                    <i class="material-icons ">info</i>
+                                    <b> RECUERDA - </b> Si es la primera vez que ingresas, debes actualizar tu
+                                    información personal</span>
+                            </div>
+                            <button class="btn btn-outline-info btn-just-icon btn-round btn-sm" style="float: right;"
+                                pTooltip="Actualizar Información" tooltipPosition="top" (click)="edit()">
+                                <i class="material-icons">edit</i>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+
+
+            </mat-card>
+        </div>
+
+    </div>
+
+    <ngx-spinner bdColor="rgba(180,180,180,0.5)" size="large" color="#ff4242" type="ball-triangle-path"
+        [fullScreen]="true">
+    </ngx-spinner>

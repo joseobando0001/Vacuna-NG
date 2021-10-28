@@ -24,7 +24,10 @@ export class RegisterComponent implements OnInit {
     private spinner: NgxSpinnerService, private adminService: AdminService) { }
 
   ngOnInit(): void {
-    this.getVacunas();
+    this.spinner.show();
+    setTimeout(() => {
+      this.spinner.hide();
+    }, 2000);
     this.registerForm = this.formBuilder.group({
       cedula: ['', Validators.required],
       nombres: ['', Validators.required],
@@ -109,12 +112,5 @@ export class RegisterComponent implements OnInit {
     this.registerForm.reset();
   }
 
-  getVacunas() {
-    this.adminService.getdata('vacunas').subscribe((data) => {
-      this.formData = data;
-      console.log(data);
-    });
-
-  }
 
 }
