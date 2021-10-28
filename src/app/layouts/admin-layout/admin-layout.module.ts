@@ -45,6 +45,9 @@ import { MessageModule } from 'primeng/message';
 import {MatStepperModule} from '@angular/material/stepper'
 import { RegisterComponent } from 'app/register/register.component';
 import { ModificarUserComponent } from 'app/creacion/modificar-user/modificar-user.component';
+import { MostrarVacunadosComponent } from 'app/vacunado/mostrar-vacunados/mostrar-vacunados.component';
+import { EditarVacunadosComponent } from 'app/vacunado/editar-vacunados/editar-vacunados.component';
+import { LoginComponent } from 'app/login/login.component';
 
 @NgModule({
   imports: [
@@ -97,7 +100,10 @@ import { ModificarUserComponent } from 'app/creacion/modificar-user/modificar-us
     PersonComponent,
     CreacionComponent,
     ModificarUserComponent,
-    VacunadoComponent
+    VacunadoComponent,
+    MostrarVacunadosComponent,
+    EditarVacunadosComponent,
+    LoginComponent
   ]
 })
 

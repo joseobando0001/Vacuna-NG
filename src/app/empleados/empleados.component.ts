@@ -145,6 +145,13 @@ export class EmpleadosComponent implements OnInit {
   eliminar(idPersona: any) {
     console.log(idPersona);
     this.adminService.delete('empleado/' + idPersona).subscribe(data => {
+      Swal.fire({
+        title: 'Eliminado!',
+        text: 'El empleado ha sido eliminado',
+        icon: 'success',
+        showConfirmButton: false,
+        timer: 1500
+      })
       this.getEmpleados();
     }, error => {
       console.log(error);
@@ -162,6 +169,7 @@ export class EmpleadosComponent implements OnInit {
           localStorage.setItem('empleado', btoa(id));
           this.router.navigate(['/vacunado']);
         } else {
+          localStorage.setItem('empleado', btoa(id));
           console.log('DATOS');
           Swal.fire({
             title: 'Deseas agregar mas vacunas?',
@@ -175,7 +183,7 @@ export class EmpleadosComponent implements OnInit {
             if (result.isConfirmed) {
               this.router.navigate(['/vacunado']);
             } else if (result.isDenied) {
-             console.log('Mostrar ');
+              this.router.navigate(['/vacunaciones']);
             }
           })
         }

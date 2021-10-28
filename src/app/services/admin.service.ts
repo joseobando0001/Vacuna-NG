@@ -28,9 +28,36 @@ export class AdminService {
   post(url: string, data: any) {
     return this.httpClient.post(environment.API_URL + url, data).subscribe(
       response => {
-
+        console.log(response);
+        return response;
       },
       error => {
+        return error;
+      }
+
+    );
+  }
+
+  login(url: string, data: any) {
+    return this.httpClient.post(environment.API_URL + url, data).subscribe(
+      response => {
+        console.log(response);
+        if (response['tipo'] === 'ADMIN') {
+          localStorage.setItem('tipo', btoa(response['tipo']));
+          console.log('ADMIN');
+          return response;
+        } else if (response['tipo'] === 'EMPLEADO') {
+          localStorage.setItem('tipo', btoa(response['tipo']));
+          console.log('empleado');
+          return response;
+        }
+        else if (data === null) {
+          localStorage.setItem('tipo', btoa(response['tipo']));
+          console.log('error');
+        }
+      },
+      error => {
+        return error;
       }
 
     );

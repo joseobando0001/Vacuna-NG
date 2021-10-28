@@ -1,47 +1,57 @@
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
-import { Router } from '@angular/router';
+import { ActivatedRoute, NavigationEnd, Router } from '@angular/router';
 import { AdminService } from 'app/services/admin.service';
 import { NgxSpinnerService } from 'ngx-spinner';
 import Swal from 'sweetalert2';
 
 @Component({
-  selector: 'app-vacunado',
-  templateUrl: './vacunado.component.html',
-  styleUrls: ['./vacunado.component.css']
+  selector: 'app-editar-vacunados',
+  templateUrl: './editar-vacunados.component.html',
+  styleUrls: ['./editar-vacunados.component.css']
 })
-export class VacunadoComponent implements OnInit {
+export class EditarVacunadosComponent implements OnInit {
+
+  navigationSubscription;
   registerForm: FormGroup;
+  registerVacunado: FormGroup;
   submitted = false;
   vacunado: any;
-  display: boolean;
+  vacunas: any;
+  idform;
   cedula;
-  vacunas;
 
-  constructor(private formBuilder: FormBuilder, private router: Router,
-    private spinner: NgxSpinnerService, private adminService: AdminService) { }
+  cols: any[];
+  constructor(private formBuilder: FormBuilder, private route: ActivatedRoute,
+    private router: Router, private adminService: AdminService, private spinner: NgxSpinnerService) {
+    this.navigationSubscription = this.router.events.subscribe((e: any) => {
+      if (e instanceof NavigationEnd) {
+      }
+    });
+
+  }
 
   ngOnInit(): void {
+    this.initializar();
     this.getVacunas();
     this.cedula = atob(localStorage.getItem('empleado'));
+    this.getEmpleadoId(this.idform);
     this.registerForm = this.formBuilder.group({
       vacuna: ['', Validators.required],
       fecha: ['', Validators.required],
       numero_dosis: ['', Validators.required],
-
     });
-    this.display = false;
     this.vacunado = {
-      cedula: this.cedula,
+      cedula: '',
       id_vacuna: '',
+      apellidos: '',
       fecha: '',
       numero_dosis: '',
-
     };
   }
+
   // convenience getter for easy access to form fields
   get f() { return this.registerForm.controls; }
-
 
   onSubmit() {
     this.submitted = true;
@@ -50,14 +60,7 @@ export class VacunadoComponent implements OnInit {
     if (this.registerForm.invalid) {
       return;
     }
-    this.spinner.show();
-    this.crearEmpleado();
-    // display form values on success
-    alert('SUCCESS!! :-)\n\n' + JSON.stringify(this.registerForm.value, null, 4));
-  }
-
-  crearEmpleado() {
-    this.adminService.post('vacunacion', this.vacunado);
+    this.editarEmpleado();
     const Toast = Swal.mixin({
       toast: true,
       position: 'top-end',
@@ -75,11 +78,17 @@ export class VacunadoComponent implements OnInit {
       title: 'Guardado Exitosamente'
     })
     setTimeout(() => {
-      this.spinner.hide();
       /** spinner ends after 5 seconds */
-      this.router.navigate(['/empleados']);
-    }, 3000);
+      this.router.navigate(['/vacunaciones']);
 
+    }, 3000);
+    // display form values on success
+    alert('SUCCESS!! :-)\n\n' + JSON.stringify(this.registerForm.value, null, 4));
+  }
+
+  editarEmpleado() {
+    this.adminService.post('vacunacion', this.vacunado);
+    this.router.navigate(['/vacunaciones']);
   }
 
   cancelModal() {
@@ -99,7 +108,7 @@ export class VacunadoComponent implements OnInit {
   }
 
   cancel() {
-    this.router.navigate(['/empleados']);
+    this.router.navigate(['/vacunaciones']);
   }
 
   onReset() {
@@ -107,14 +116,27 @@ export class VacunadoComponent implements OnInit {
     this.registerForm.reset();
   }
 
+  getEmpleadoId(id: number) {
+    this.vacunado = [];
+    this.adminService.get('vacunacion/' + id).subscribe((data: {}) => {
+      this.vacunado = data[0];
+
+    });
+  }
 
   getVacunas() {
-    this.adminService.getdata('vacunas').subscribe((data) => {
-      console.log(data);
+    this.vacunas = [];
+    this.adminService.get('vacunas').subscribe((data: {}) => {
       this.vacunas = data;
-    });
 
+    });
   }
-  
+
+
+  initializar() {
+    if (this.route.snapshot.params.id.length) {
+      this.idform = this.route.snapshot.params.id;
+    }
+  }
 
 }

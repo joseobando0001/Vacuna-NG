@@ -1,3 +1,4 @@
+import { AuthService } from 'app/services/auth.service';
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
@@ -6,37 +7,30 @@ import { NgxSpinnerService } from 'ngx-spinner';
 import Swal from 'sweetalert2';
 
 @Component({
-  selector: 'app-vacunado',
-  templateUrl: './vacunado.component.html',
-  styleUrls: ['./vacunado.component.css']
+  selector: 'app-login',
+  templateUrl: './login.component.html',
+  styleUrls: ['./login.component.css']
 })
-export class VacunadoComponent implements OnInit {
+export class LoginComponent implements OnInit {
   registerForm: FormGroup;
   submitted = false;
-  vacunado: any;
+  user: any;
   display: boolean;
   cedula;
-  vacunas;
 
   constructor(private formBuilder: FormBuilder, private router: Router,
-    private spinner: NgxSpinnerService, private adminService: AdminService) { }
+    private spinner: NgxSpinnerService, private adminService: AdminService, private authService: AuthService) { }
 
   ngOnInit(): void {
-    this.getVacunas();
     this.cedula = atob(localStorage.getItem('empleado'));
     this.registerForm = this.formBuilder.group({
-      vacuna: ['', Validators.required],
-      fecha: ['', Validators.required],
-      numero_dosis: ['', Validators.required],
-
+      username: ['', Validators.required],
+      password: ['', Validators.required],
     });
     this.display = false;
-    this.vacunado = {
-      cedula: this.cedula,
-      id_vacuna: '',
-      fecha: '',
-      numero_dosis: '',
-
+    this.user = {
+      username: '',
+      password: '',
     };
   }
   // convenience getter for easy access to form fields
@@ -57,29 +51,41 @@ export class VacunadoComponent implements OnInit {
   }
 
   crearEmpleado() {
-    this.adminService.post('vacunacion', this.vacunado);
-    const Toast = Swal.mixin({
-      toast: true,
-      position: 'top-end',
-      showConfirmButton: false,
-      timer: 3000,
-      timerProgressBar: true,
-      didOpen: (toast) => {
-        toast.addEventListener('mouseenter', Swal.stopTimer)
-        toast.addEventListener('mouseleave', Swal.resumeTimer)
-      }
-    })
+    this.adminService.login('user/login', this.user);
+    console.log(this.user);
+    if (atob(localStorage.getItem('tipo')) === 'ADMIN') {
+      const Toast = Swal.mixin({
+        toast: true,
+        position: 'top-end',
+        showConfirmButton: false,
+        timer: 3000,
+        timerProgressBar: true,
+        didOpen: (toast) => {
+          toast.addEventListener('mouseenter', Swal.stopTimer)
+          toast.addEventListener('mouseleave', Swal.resumeTimer)
+        }
+      })
 
-    Toast.fire({
-      icon: 'success',
-      title: 'Guardado Exitosamente'
-    })
-    setTimeout(() => {
+      Toast.fire({
+        icon: 'success',
+        title: 'Guardado Exitosamente'
+      })
+      setTimeout(() => {
+        this.spinner.hide();
+        /** spinner ends after 5 seconds */
+        //  this.router.navigate(['/empleados']);
+      }, 3000);
+    } else if (atob(localStorage.getItem('tipo')) === 'EMPLEADO') {
+      console.log('HOLA soy empleado');
       this.spinner.hide();
-      /** spinner ends after 5 seconds */
-      this.router.navigate(['/empleados']);
-    }, 3000);
 
+    }
+    else if (atob(localStorage.getItem('tipo')) === null) {
+      this.spinner.hide();
+
+      console.log('NADIE');
+
+    }
   }
 
   cancelModal() {
@@ -107,14 +113,5 @@ export class VacunadoComponent implements OnInit {
     this.registerForm.reset();
   }
 
-
-  getVacunas() {
-    this.adminService.getdata('vacunas').subscribe((data) => {
-      console.log(data);
-      this.vacunas = data;
-    });
-
-  }
-  
 
 }

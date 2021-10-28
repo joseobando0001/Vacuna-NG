@@ -9,6 +9,7 @@ export const ROUTES = [
   { path: '/person', title: 'Perfil', icon: 'person', class: '' },
   { path: '/empleados', title: 'Empleados', icon: 'badge', class: '' },
   { path: '/register', title: 'Registrarse', icon: 'app_registration', class: '' },
+  { path: '/login', title: 'Iniciar Sesion', icon: 'login', class: '' },
 
 ];
 

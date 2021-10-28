@@ -1,34 +1,38 @@
-import { Vacunas } from 'app/models/vacunas.model';
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
+import { VacunacionEmpleado } from 'app/models/vacunacionempleado.model';
 import { AdminService } from 'app/services/admin.service';
 import { NgxSpinnerService } from 'ngx-spinner';
 import Swal from 'sweetalert2';
 
 @Component({
-  selector: 'app-vacunas',
-  templateUrl: './vacunas.component.html',
-  styleUrls: ['./vacunas.component.css']
+  selector: 'app-mostrar-vacunados',
+  templateUrl: './mostrar-vacunados.component.html',
+  styleUrls: ['./mostrar-vacunados.component.css']
 })
-export class VacunasComponent implements OnInit {
-
+export class MostrarVacunadosComponent implements OnInit {
   add: boolean;
   editar: boolean;
+  cedula;
   ocultarboton: boolean;
   display: boolean;
-  formData: Vacunas;
+  formData: VacunacionEmpleado;
   cols: any[];
-
   constructor(private adminService: AdminService, private router: Router, private spinner: NgxSpinnerService) { }
 
   ngOnInit(): void {
-    this.getVacunas();
+    this.cedula = atob(localStorage.getItem('empleado'));
+    console.log(this.cedula);
+    this.getVacunasbyCedula(this.cedula);
     this.ocultarboton = true;
     this.add = false;
     this.editar = false;
     this.display = true;
     this.cols = [
       { field: 'descripcion', header: 'Descripcion' },
+      { field: 'fecha', header: 'Fecha de vacunación' },
+      { field: 'numero', header: 'Numero de dosis' },
+
     ];
 
   }
@@ -45,13 +49,13 @@ export class VacunasComponent implements OnInit {
   }
 
   getModificarVacuna(id: number) {
-    this.router.navigate(['/modificar-vacuna', id], {
+    this.router.navigate(['/modificar-vacunaciones', id], {
       skipLocationChange: true,
     });
   }
 
-  getVacunas() {
-    this.adminService.getdata('vacunas').subscribe((data) => {
+  getVacunasbyCedula(id) {
+    this.adminService.getdata('vacunacionesced/' + id).subscribe((data) => {
       this.formData = data;
     });
 
@@ -59,7 +63,7 @@ export class VacunasComponent implements OnInit {
 
   modalBorrar(id) {
     Swal.fire({
-      title: 'Estas seguro de eliminar este empleado?',
+      title: 'Estas seguro de eliminar esta vacunación?',
       text: 'No podras revertir los cambios!',
       icon: 'warning',
       showCancelButton: true,
@@ -75,15 +79,15 @@ export class VacunasComponent implements OnInit {
 
   eliminar(idvacuna: any) {
     console.log(idvacuna);
-    this.adminService.delete('vacuna/' + idvacuna).subscribe(data => {
+    this.adminService.delete('vacunacion/' + idvacuna).subscribe(data => {
       Swal.fire({
         title: 'Eliminado!',
-        text: 'La vacuna ha sido eliminada',
+        text: 'La vacunación ha sido eliminada',
         icon: 'success',
         showConfirmButton: false,
         timer: 1500
       })
-      this.getVacunas();
+      this.getVacunasbyCedula(this.cedula);
     }, error => {
       console.log(error);
     });
