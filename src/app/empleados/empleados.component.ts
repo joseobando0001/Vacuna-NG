@@ -70,15 +70,12 @@ export class EmpleadosComponent implements OnInit {
 
   getEmpleados() {
     this.adminService.getdata('empleados').subscribe((data) => {
-      console.log(data);
       this.formData = data;
     });
 
   }
 
   edit(id) {
-    console.log(id);
-    //localStorage.setItem('empleado', btoa(id));
     this.spinner.show();
 
     setTimeout(() => {
@@ -90,18 +87,15 @@ export class EmpleadosComponent implements OnInit {
   }
 
   alta(id) {
-    console.log(id);
     this.spinner.show();
 
     setTimeout(() => {
       this.adminService.get('userced/' + id).subscribe((data: {}) => {
         this.user = data;
         if (this.user.length === 0) {
-          console.log('NADA DE DATOS', this.user.user);
           localStorage.setItem('empleado', btoa(id));
           this.router.navigate(['/creacion']);
         } else {
-          console.log('DATOS');
           Swal.fire({
             title: 'Se encontraron datos, deseas editarlos?',
             icon: 'info',
@@ -143,7 +137,6 @@ export class EmpleadosComponent implements OnInit {
   }
 
   eliminar(idPersona: any) {
-    console.log(idPersona);
     this.adminService.delete('empleado/' + idPersona).subscribe(data => {
       Swal.fire({
         title: 'Eliminado!',
@@ -158,19 +151,16 @@ export class EmpleadosComponent implements OnInit {
     });
   }
 
-  vacunado(id){
-    console.log(id);
+  vacunado(id) {
     this.spinner.show();
     setTimeout(() => {
       this.adminService.get('vacunced/' + id).subscribe((data: {}) => {
         this.user = data;
         if (this.user.length === 0) {
-          console.log('NADA DE DATOS', this.user.user);
           localStorage.setItem('empleado', btoa(id));
           this.router.navigate(['/vacunado']);
         } else {
           localStorage.setItem('empleado', btoa(id));
-          console.log('DATOS');
           Swal.fire({
             title: 'Deseas agregar mas vacunas?',
             showDenyButton: true,

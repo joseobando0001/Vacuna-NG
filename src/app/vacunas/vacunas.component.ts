@@ -74,7 +74,6 @@ export class VacunasComponent implements OnInit {
   }
 
   eliminar(idvacuna: any) {
-    console.log(idvacuna);
     this.adminService.delete('vacuna/' + idvacuna).subscribe(data => {
       Swal.fire({
         title: 'Eliminado!',

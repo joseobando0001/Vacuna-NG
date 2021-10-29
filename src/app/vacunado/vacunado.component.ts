@@ -110,7 +110,6 @@ export class VacunadoComponent implements OnInit {
 
   getVacunas() {
     this.adminService.getdata('vacunas').subscribe((data) => {
-      console.log(data);
       this.vacunas = data;
     });
 

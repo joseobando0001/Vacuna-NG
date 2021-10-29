@@ -5,8 +5,8 @@
 
 export const environment = {
   production: false,
-  API_URL: 'http://127.0.0.1:8080/VacunaWS/',
-  //API_URL: 'https://vacuna-ws.herokuapp.com/VacunaWS/',
+  //API_URL: 'http://127.0.0.1:8080/VacunaWS/',
+  API_URL: 'https://vacuna-ws.herokuapp.com/VacunaWS/',
 
 
 };

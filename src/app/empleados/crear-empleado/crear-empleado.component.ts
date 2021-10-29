@@ -125,7 +125,6 @@ export class CrearEmpleadoComponent implements OnInit {
   getVacunas() {
     this.adminService.getdata('vacunas').subscribe((data) => {
       this.formData = data;
-      console.log(data);
     });
 
   }

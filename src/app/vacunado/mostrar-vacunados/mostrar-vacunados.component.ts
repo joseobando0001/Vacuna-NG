@@ -22,7 +22,6 @@ export class MostrarVacunadosComponent implements OnInit {
 
   ngOnInit(): void {
     this.cedula = atob(localStorage.getItem('empleado'));
-    console.log(this.cedula);
     this.getVacunasbyCedula(this.cedula);
     this.ocultarboton = true;
     this.add = false;
@@ -78,7 +77,6 @@ export class MostrarVacunadosComponent implements OnInit {
   }
 
   eliminar(idvacuna: any) {
-    console.log(idvacuna);
     this.adminService.delete('vacunacion/' + idvacuna).subscribe(data => {
       Swal.fire({
         title: 'Eliminado!',
@@ -89,7 +87,6 @@ export class MostrarVacunadosComponent implements OnInit {
       })
       this.getVacunasbyCedula(this.cedula);
     }, error => {
-      console.log(error);
     });
   }
 

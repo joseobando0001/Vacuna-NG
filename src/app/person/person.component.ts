@@ -32,7 +32,6 @@ export class PersonComponent implements OnInit {
   }
 
   edit(id) {
-    console.log(id);
     this.spinner.show();
 
     setTimeout(() => {

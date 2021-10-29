@@ -51,7 +51,6 @@ export class LoginComponent implements OnInit {
 
   crearEmpleado() {
     this.adminService.login('user/login', this.user);
-    console.log(this.user);
     if (atob(localStorage.getItem('tipo')) === 'ADMIN') {
       const Toast = Swal.mixin({
         toast: true,
@@ -75,14 +74,11 @@ export class LoginComponent implements OnInit {
         //  this.router.navigate(['/empleados']);
       }, 3000);
     } else if (atob(localStorage.getItem('tipo')) === 'EMPLEADO') {
-      console.log('HOLA soy empleado');
       this.spinner.hide();
 
     }
     else if (atob(localStorage.getItem('tipo')) === null) {
       this.spinner.hide();
-
-      console.log('NADIE');
 
     }
   }
