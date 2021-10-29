@@ -7,19 +7,21 @@
                         PERFIL
                     </h4>
                 </div>
+                <ng-container *ngFor="let e of empleado">
+                
                 <div class="col-md-12">
                     <div class="card-body">
 
                         <div class="card-title card text-white text-center bg-secondary"><strong>DATOS
                                 INFORMATIVOS</strong>
                         </div>
-                        <h5 class="card-title text-left"><strong>Nombres:</strong>
+                        <h5 class="card-title text-left"><strong>Nombres:</strong> {{e.nombres}}
                         </h5>
                         <h5 class="card-title text-left">
-                            <strong>Cedula:</strong>
+                            <strong>Cedula:</strong> {{e.cedula}}
                         </h5>
                         <h5 class="card-title text-left">
-                            <strong>Correo :</strong>
+                            <strong>Correo :</strong> {{e.correo}}
                         </h5>
 
                         <div>
@@ -30,12 +32,13 @@
                                     información personal</span>
                             </div>
                             <button class="btn btn-outline-info btn-just-icon btn-round btn-sm" style="float: right;"
-                                pTooltip="Actualizar Información" tooltipPosition="top" (click)="edit()">
+                                pTooltip="Actualizar Información" tooltipPosition="top" (click)="edit(e.id_empleado)">
                                 <i class="material-icons">edit</i>
                             </button>
                         </div>
                     </div>
                 </div>
+            </ng-container>
 
 
             </mat-card>

@@ -1,3 +1,5 @@
+import { EditarPersonComponent } from './../../person/editar-person/editar-person.component';
+import { HomeComponent } from './../../home/home.component';
 import { LoginComponent } from './../../login/login.component';
 import { EditarVacunadosComponent } from './../../vacunado/editar-vacunados/editar-vacunados.component';
 import { MostrarVacunadosComponent } from './../../vacunado/mostrar-vacunados/mostrar-vacunados.component';
@@ -13,7 +15,8 @@ import { ModificarUserComponent } from 'app/creacion/modificar-user/modificar-us
 import { VacunadoComponent } from 'app/vacunado/vacunado.component';
 
 export const AdminLayoutRoutes: Routes = [
-    { path: 'login', component: LoginComponent },
+    //  { path: 'login', component: LoginComponent },
+    { path: 'home', component: HomeComponent },
     { path: 'error', component: ErrorComponent },
     { path: 'person', component: PersonComponent },
     { path: 'empleados', component: EmpleadosComponent },
@@ -21,6 +24,7 @@ export const AdminLayoutRoutes: Routes = [
     { path: 'creacion', component: CreacionComponent },
     { path: 'vacunado', component: VacunadoComponent },
     { path: 'modificar-empleado/:id', component: EditarEmpleadoComponent },
+    { path: 'editar-persona/:id', component: EditarPersonComponent },
     { path: 'modificar-vacuna/:id', component: EditarVacunaComponent },
     { path: 'modificar-user/:id', component: ModificarUserComponent },
     { path: 'vacunaciones', component: MostrarVacunadosComponent },

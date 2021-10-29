@@ -1,3 +1,4 @@
+import { EditarPersonComponent } from './../../person/editar-person/editar-person.component';
 import { VacunadoComponent } from './../../vacunado/vacunado.component';
 import { CreacionComponent } from './../../creacion/creacion.component';
 import { PersonComponent } from './../../person/person.component';
@@ -97,7 +98,8 @@ import { LoginComponent } from 'app/login/login.component';
     VacunadoComponent,
     MostrarVacunadosComponent,
     EditarVacunadosComponent,
-    LoginComponent
+    LoginComponent,
+    EditarPersonComponent
   ]
 })
 

@@ -62,6 +62,7 @@ export class RegisterComponent implements OnInit {
 
   crearEmpleado() {
     this.adminService.post('empleado', this.empleado);
+    localStorage.setItem('user', btoa(this.empleado.cedula));
     const Toast = Swal.mixin({
       toast: true,
       position: 'top-end',
@@ -81,7 +82,7 @@ export class RegisterComponent implements OnInit {
     setTimeout(() => {
       this.spinner.hide();
       /** spinner ends after 5 seconds */
-      this.router.navigate(['/register']);
+      this.router.navigate(['/person']);
     }, 3000);
 
   }
@@ -103,8 +104,7 @@ export class RegisterComponent implements OnInit {
   }
 
   cancel() {
-    this.router.navigate(['/register']);
-    window.location.reload();
+    this.router.navigate(['/home']);
   }
 
   onReset() {
