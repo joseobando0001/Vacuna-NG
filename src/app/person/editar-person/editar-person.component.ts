@@ -148,7 +148,7 @@ export class EditarPersonComponent implements OnInit {
     this.empleado = [];
     this.adminService.get('empleado/' + id).subscribe((data: {}) => {
       this.empleado = data[0];
-      this.getVacunacion(this.empleado.cedula);
+      this.getVacunacion(this.empleado[0].cedula);
     });
   }
 
